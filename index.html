@@ -1362,8 +1362,7 @@
         </div>
 
         <div class="quote-card">
-          <form
-            <form id="quoteForm">
+          <form id="quoteForm" enctype="multipart/form-data">
 
             <div class="quote-form-grid">
               <div class="form-field">
@@ -1618,6 +1617,11 @@
   </footer>
 
   <!-- ================= SCRIPTS ================= -->
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <script>
+    emailjs.init("fkYGtNf8z5F-fHx6X");
+  </script>
+
   <script>
     // Mobile nav toggle
     const navBar = document.getElementById('navbar');
@@ -1698,13 +1702,25 @@
       });
     }
 
-    // Thank-you message on submit (keeps FormSubmit behaviour)
+    // EmailJS submit (replaces FormSubmit)
     const quoteForm = document.getElementById('quoteForm');
     const thankYou = document.getElementById('thankYou');
 
     if (quoteForm && thankYou) {
-      quoteForm.addEventListener('submit', () => {
-        thankYou.style.display = 'block';
+      quoteForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        emailjs.sendForm(
+          'service_eepibe2',
+          'template_y3b7tgc',
+          this
+        ).then(() => {
+          thankYou.style.display = 'block';
+          quoteForm.reset();
+        }).catch((err) => {
+          alert('Failed to send enquiry. Please try again.');
+          console.error(err);
+        });
       });
     }
   </script>
