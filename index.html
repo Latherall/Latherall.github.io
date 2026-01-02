@@ -962,7 +962,7 @@
     .contact-bg {
       position: absolute;
       inset: 0;
-      background: url("van-image.PNG") center/cover no-repeat;
+      background: url("van-image.png") center/cover no-repeat;
       filter: blur(7px) brightness(0.45);
       transform: scale(1.02);
       z-index: -2;
@@ -1060,6 +1060,38 @@
       opacity: 1;
       transform: translateY(0);
     }
+    /* ================= MOBILE POLISH ================= */
+
+    /* Prevent flex/grid children from forcing overflow on small screens */
+    .hero > *,
+    .about-layout > *,
+    .gallery-layout > *,
+    .quote-layout > *,
+    .contact-inner > * {
+      min-width: 0;
+    }
+
+    @media (max-width: 520px) {
+      .nav-brand { display: none; }
+      .nav-bar { padding: 10px 12px; gap: 10px; }
+      .nav-cta {
+        padding: 8px 12px;
+        font-size: 0.78rem;
+        letter-spacing: 0.1em;
+      }
+    }
+
+    @media (max-width: 420px) {
+      /* On tiny phones, hide the CTA to avoid squashing/overlap */
+      .nav-cta { display: none; }
+      .nav-menu-open .nav-links {
+        left: 12px;
+        right: 12px;
+        align-items: flex-start;
+      }
+      .nav-menu-open .nav-links a { width: 100%; }
+    }
+
   </style>
 </head>
 <body>
@@ -1068,7 +1100,7 @@
   <header class="site-header">
     <div class="nav-bar" id="navbar">
       <div class="nav-left">
-        <img src="logo.png" alt="Roadside Refinish Logo" class="nav-logo">
+        <img src="Logo.png" alt="Roadside Refinish Logo" class="nav-logo">
         <div class="nav-brand">Roadside Refinish</div>
       </div>
       <nav class="nav-links">
@@ -1095,7 +1127,7 @@
       <div class="hero-media">
         <div class="hero-overlay"></div>
         <div class="hero-logo-wrap">
-          <img src="logo.png" alt="Roadside Refinish Logo" class="hero-logo">
+          <img src="Logo.png" alt="Roadside Refinish Logo" class="hero-logo">
         </div>
         <div class="hero-badge">
           <span class="dot"></span>
@@ -1329,7 +1361,9 @@
               <div class="gallery-badge">Before & afters</div>
               <div class="gallery-badge">Wheels · Panels · Calipers</div>
             </div>
-          <div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- ================= QUOTE / BOOKING ================= -->
@@ -1362,9 +1396,16 @@
         </div>
 
         <div class="quote-card">
-          <form id="quoteForm" enctype="multipart/form-data">
-
-            <div class="quote-form-grid">
+          <form
+            action="https://formsubmit.co/roadsiderefinish@outlook.com"
+            method="POST"
+            enctype="multipart/form-data"
+            id="quoteForm">
+                        <input type="hidden" name="_subject" value="New quote request - Roadside Refinish">
+            <input type="hidden" name="_template" value="table">
+            <input type="text" name="_honey" style="display:none">
+            <input type="hidden" name="_next" value="./?submitted=1#quote">
+<div class="quote-form-grid">
               <div class="form-field">
                 <label class="form-label" for="email">Email</label>
                 <input class="form-control" type="email" id="email" name="email" placeholder="you@example.com" required>
@@ -1411,8 +1452,13 @@
               </div>
 
               <div class="form-field quote-form-grid-full">
-                <label class="form-label" for="images">Upload images</label>
-                <input class="form-control" type="file" id="images" name="images" accept="image/*" multiple>
+                <label class="form-label" for="attachment1">Upload images</label>
+                <input class="form-control" type="file" id="attachment1" name="attachment" accept="image/*">
+                <input class="form-control" type="file" id="attachment2" name="attachment2" accept="image/*" style="margin-top:10px">
+                <input class="form-control" type="file" id="attachment3" name="attachment3" accept="image/*" style="margin-top:10px">
+                <p class="postcode-feedback" style="margin-top:8px;color:#888">
+                  Tip: keep total upload under 5MB.
+                </p>
               </div>
             </div>
 
@@ -1617,11 +1663,6 @@
   </footer>
 
   <!-- ================= SCRIPTS ================= -->
-  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-  <script>
-    emailjs.init("fkYGtNf8z5F-fHx6X");
-  </script>
-
   <script>
     // Mobile nav toggle
     const navBar = document.getElementById('navbar');
@@ -1702,34 +1743,28 @@
       });
     }
 
-    // EmailJS submit (replaces FormSubmit)
+    // Thank-you / state handling for FormSubmit
     const quoteForm = document.getElementById('quoteForm');
     const thankYou = document.getElementById('thankYou');
 
-    if (quoteForm && thankYou) {
-      quoteForm.addEventListener('submit', function (e) {
-        e.preventDefault();
+    // If redirected back with ?submitted=1, show the message.
+    const params = new URLSearchParams(window.location.search);
+    if (thankYou && params.get('submitted') === '1') {
+      thankYou.style.display = 'block';
+    }
 
-        emailjs.sendForm(
-          'service_eepibe2',
-          'template_y3b7tgc',
-          this
-        ).then(() => {
-          thankYou.style.display = 'block';
-          quoteForm.reset();
-        }).catch((err) => {
-          alert('Failed to send enquiry. Please try again.');
-          console.error(err);
-        });
+    // On submit, disable the button so people don't double-send.
+    if (quoteForm) {
+      quoteForm.addEventListener('submit', () => {
+        const btn = quoteForm.querySelector('button[type="submit"]');
+        if (btn) {
+          btn.disabled = true;
+          btn.textContent = 'Sending...';
+          btn.style.opacity = '0.8';
+          btn.style.cursor = 'not-allowed';
+        }
       });
     }
-  </script>
+</script>
 </body>
 </html>
-
-
-
-
-
-
-
