@@ -963,7 +963,7 @@
     .contact-bg {
       position: absolute;
       inset: 0;
-      background: url("van-image.png") center/cover no-repeat;
+      background: url("van-image.PNG") center/cover no-repeat;
       filter: blur(7px) brightness(0.45);
       transform: scale(1.02);
       z-index: -2;
@@ -1395,6 +1395,11 @@
         </div>
 
         <div class="quote-card">
+          <section id="quote">
+          <div id="successMessage" style="display:none; color:#4CAF50; margin-bottom:20px;">
+           Thanks — we’ve received your enquiry and will be in touch shortly.
+           </div>
+
           <form
             action="https://formsubmit.co/roadsiderefinish@outlook.com"
             method="POST"
@@ -1763,6 +1768,14 @@
         }
       });
     }
+    <script>
+  const params = new URLSearchParams(window.location.search);
+  if (params.get("submitted") === "1") {
+    document.getElementById("successMessage").style.display = "block";
+  }
+</script>
+</body>
+
 </script>
 </body>
 </html>
