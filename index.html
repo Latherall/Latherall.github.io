@@ -1294,8 +1294,8 @@
               </div>
 
               <div class="form-field quote-form-grid-full">
-                <label class="form-label" for="attachment1">Upload images</label>
-                <input class="form-control" type="file" id="attachment1" name="attachment" accept="image/*">
+                <label class="form-label" for="attachment1">Upload images (minimum 2) </label>
+                <input class="form-control" type="file" id="attachment1" name="attachment[]" accept="image/*"multiple required>
                 <p class="postcode-feedback" style="margin-top:8px;color:#888">
                   Tip: keep total upload under 5MB.
                 </p>
@@ -1650,6 +1650,12 @@
     const postcodeInput = document.getElementById('postcode');
     const feedback = document.getElementById('postcodeFeedback');
 
+    // Quote form reference
+const quoteForm = document.querySelector('form'); 
+// OR better, if your form has an id:
+// const quoteForm = document.getElementById('quoteForm');
+
+
     if (postcodeInput && feedback) {
       postcodeInput.addEventListener('input', () => {
         const postcode = postcodeInput.value.trim().toUpperCase();
@@ -1688,20 +1694,42 @@
       });
     }
 
+const fileInput = document.getElementById('attachment1');
+
+if (fileInput) {
+  fileInput.addEventListener('change', () => {
+    if (fileInput.files.length < 2) {
+      fileInput.setCustomValidity('Please upload at least 2 photos.');
+    } else {
+      fileInput.setCustomValidity('');
+    }
+  });
+}
+
     
 
-    // On submit, disable the button so people don't double-send.
-    if (quoteForm) {
-      quoteForm.addEventListener('submit', () => {
-        const btn = quoteForm.querySelector('button[type="submit"]');
-        if (btn) {
-          btn.disabled = true;
-          btn.textContent = 'Sending...';
-          btn.style.opacity = '0.8';
-          btn.style.cursor = 'not-allowed';
-        }
-      });
+// On submit, disable the button so people don't double-send.
+if (quoteForm) {
+  quoteForm.addEventListener('submit', (e) => {
+
+    // Enforce minimum 2 photos on submit as well
+    if (fileInput && fileInput.files.length < 2) {
+      fileInput.setCustomValidity('Please upload at least 2 photos.');
+      fileInput.reportValidity();
+      e.preventDefault();
+      return;
     }
+
+    const btn = quoteForm.querySelector('button[type="submit"]');
+    if (btn) {
+      btn.disabled = true;
+      btn.textContent = 'Sending...';
+      btn.style.opacity = '0.8';
+      btn.style.cursor = 'not-allowed';
+    }
+  });
+}
+
 </script>
 </body>
 </html>
