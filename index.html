@@ -1295,7 +1295,7 @@
 
               <div class="form-field quote-form-grid-full">
                 <label class="form-label" for="attachment1">Upload images (minimum 2) </label>
-                <input class="form-control" type="file" id="attachment1" name="attachment[]" accept="image/*"multiple required>
+                <input class="form-control" type="file" id="attachment1" name="attachment" accept="image/*"multiple required>
                 <p class="postcode-feedback" style="margin-top:8px;color:#888">
                   Tip: keep total upload under 5MB.
                 </p>
@@ -1698,26 +1698,39 @@ const fileInput = document.getElementById('attachment1');
 
 if (fileInput) {
   fileInput.addEventListener('change', () => {
-    if (fileInput.files.length < 2) {
+    const count = fileInput.files.length;
+
+    if (count < 2) {
       fileInput.setCustomValidity('Please upload at least 2 photos.');
+    } else if (count > 3) {
+      fileInput.setCustomValidity('Please upload no more than 3 photos.');
     } else {
       fileInput.setCustomValidity('');
     }
   });
 }
 
-    
-
 // On submit, disable the button so people don't double-send.
 if (quoteForm) {
   quoteForm.addEventListener('submit', (e) => {
 
-    // Enforce minimum 2 photos on submit as well
-    if (fileInput && fileInput.files.length < 2) {
-      fileInput.setCustomValidity('Please upload at least 2 photos.');
-      fileInput.reportValidity();
-      e.preventDefault();
-      return;
+    // Enforce 2–3 photos on submit as well
+    if (fileInput) {
+      const count = fileInput.files.length;
+
+      if (count < 2) {
+        fileInput.setCustomValidity('Please upload at least 2-3 photos.');
+        fileInput.reportValidity();
+        e.preventDefault();
+        return;
+      }
+
+      if (count > 3) {
+        fileInput.setCustomValidity('Please upload no more than 3 photos.');
+        fileInput.reportValidity();
+        e.preventDefault();
+        return;
+      }
     }
 
     const btn = quoteForm.querySelector('button[type="submit"]');
@@ -1729,6 +1742,7 @@ if (quoteForm) {
     }
   });
 }
+
 
 </script>
 </body>
