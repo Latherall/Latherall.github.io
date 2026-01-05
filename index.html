@@ -1701,9 +1701,9 @@ if (fileInput) {
     const count = fileInput.files.length;
 
     if (count < 2) {
-      fileInput.setCustomValidity('Please upload at least 2 photos.');
+      fileInput.setCustomValidity('Please upload at least 2-3 photos.');
     } else if (count > 3) {
-      fileInput.setCustomValidity('Please upload no more than 3 photos.');
+      fileInput.setCustomValidity('Max 3 photos.');
     } else {
       fileInput.setCustomValidity('');
     }
@@ -1726,7 +1726,7 @@ if (quoteForm) {
       }
 
       if (count > 3) {
-        fileInput.setCustomValidity('Please upload no more than 3 photos.');
+        fileInput.setCustomValidity('Max 3 photos.');
         fileInput.reportValidity();
         e.preventDefault();
         return;
