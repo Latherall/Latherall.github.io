@@ -1,0 +1,531 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Roadside Refinish | Mobile SMART Repairs Doncaster, Worksop, Rotherham & Sheffield</title>
+  <meta name="description" content="Roadside Refinish provides fully mobile SMART repair, alloy wheel repair, diamond cut alloy repair, bumper scuff repair, panel spot repair and local bodywork repair services across Doncaster, Worksop, Rotherham and Sheffield.">
+  <meta name="keywords" content="SMART repairs Doncaster, alloy wheel repairs Worksop, bumper scuffs Rotherham, mobile bodywork repairs Sheffield, diamond cut alloy repair, Roadside Refinish">
+  <meta property="og:title" content="Roadside Refinish | Mobile SMART Repairs">
+  <meta property="og:description" content="Premium mobile SMART repairs, alloy repairs, bumper scuffs and panel repairs across Doncaster, Worksop, Rotherham, Sheffield and nearby areas.">
+  <meta property="og:type" content="website">
+  <style>
+    :root {
+      --red: #d81724;
+      --red-dark: #a80f19;
+      --black: #080808;
+      --ink: #171717;
+      --muted: #6f6f6f;
+      --line: rgba(255, 255, 255, 0.16);
+      --surface: #f6f6f6;
+      --white: #ffffff;
+      --shadow: 0 20px 50px rgba(0, 0, 0, 0.18);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--ink);
+      background: var(--white);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .hero {
+      min-height: 76vh;
+      display: grid;
+      place-items: end start;
+      position: relative;
+      overflow: hidden;
+      color: var(--white);
+      background:
+        linear-gradient(90deg, rgba(0, 0, 0, 0.88), rgba(0, 0, 0, 0.42), rgba(0, 0, 0, 0.2)),
+        url("logo.png") center / cover no-repeat,
+        linear-gradient(135deg, #111, #2a2a2a);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0;
+      height: 38%;
+      background: linear-gradient(0deg, rgba(0, 0, 0, 0.72), transparent);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      width: min(1120px, calc(100% - 36px));
+      margin: 0 auto;
+      padding: 80px 0 72px;
+      position: relative;
+      z-index: 1;
+      animation: riseIn 800ms ease both;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 18px;
+      color: #f1f1f1;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 42px;
+      height: 3px;
+      background: var(--red);
+    }
+
+    h1 {
+      max-width: 820px;
+      margin: 0;
+      font-size: clamp(2.3rem, 6vw, 5.6rem);
+      line-height: 0.95;
+      letter-spacing: 0;
+    }
+
+    .hero p {
+      max-width: 660px;
+      margin: 22px 0 0;
+      color: #eeeeee;
+      font-size: clamp(1rem, 2vw, 1.2rem);
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 22px;
+      border: 1px solid transparent;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 800;
+      transition: transform 180ms ease, background 180ms ease, border-color 180ms ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      background: var(--red);
+      color: var(--white);
+      box-shadow: 0 12px 28px rgba(216, 23, 36, 0.32);
+    }
+
+    .btn-primary:hover {
+      background: var(--red-dark);
+    }
+
+    .btn-outline {
+      border-color: var(--line);
+      color: var(--white);
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(6px);
+    }
+
+    main {
+      overflow: hidden;
+    }
+
+    section {
+      padding: 70px 18px;
+    }
+
+    .section-inner {
+      width: min(1120px, 100%);
+      margin: 0 auto;
+    }
+
+    .about {
+      background: var(--white);
+    }
+
+    .section-label {
+      color: var(--red);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      margin: 8px 0 18px;
+      font-size: clamp(1.8rem, 3vw, 3rem);
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 42px;
+      align-items: start;
+    }
+
+    .lead {
+      margin-top: 0;
+      font-size: 1.08rem;
+      color: #353535;
+    }
+
+    .services {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .service {
+      padding: 16px;
+      border-left: 4px solid var(--red);
+      background: var(--surface);
+      border-radius: 6px;
+      font-weight: 800;
+    }
+
+    .coverage {
+      padding: 24px;
+      color: var(--white);
+      background: var(--black);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      animation: floatSoft 5s ease-in-out infinite;
+    }
+
+    .coverage h3 {
+      margin: 0 0 14px;
+      font-size: 1.3rem;
+    }
+
+    .coverage ul {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .coverage li {
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .gallery {
+      background: #111;
+      color: var(--white);
+    }
+
+    .gallery-frame {
+      min-height: 420px;
+      border-radius: 8px;
+      overflow: hidden;
+      position: relative;
+      background: #202020;
+      box-shadow: var(--shadow);
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      background-position: center;
+      background-size: cover;
+      opacity: 0;
+      animation: galleryFade 20s infinite;
+    }
+
+    .slide:nth-child(1) {
+      background-image: url("gallery1.jpg");
+      animation-delay: 0s;
+    }
+
+    .slide:nth-child(2) {
+      background-image: url("gallery2.jpg");
+      animation-delay: 5s;
+    }
+
+    .slide:nth-child(3) {
+      background-image: url("gallery3.jpg");
+      animation-delay: 10s;
+    }
+
+    .slide:nth-child(4) {
+      background-image: url("gallery4.jpg");
+      animation-delay: 15s;
+    }
+
+    .gallery-frame::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: linear-gradient(90deg, rgba(0, 0, 0, 0.72), rgba(0, 0, 0, 0.12));
+      pointer-events: none;
+    }
+
+    .gallery-copy {
+      position: relative;
+      z-index: 2;
+      width: min(460px, calc(100% - 36px));
+      padding: 34px;
+    }
+
+    .gallery-copy p {
+      color: #dddddd;
+    }
+
+    .contact {
+      background: var(--surface);
+    }
+
+    .contact-panel {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 28px;
+      align-items: center;
+      padding: 34px;
+      color: var(--white);
+      background: var(--black);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+
+    .contact-panel h2 {
+      margin-bottom: 8px;
+    }
+
+    .contact-panel p {
+      margin: 0;
+      color: #dddddd;
+    }
+
+    .contact-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: flex-end;
+    }
+
+    .email {
+      display: inline-flex;
+      align-items: center;
+      min-height: 48px;
+      padding: 0 18px;
+      color: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 800;
+    }
+
+    footer {
+      padding: 24px 18px;
+      color: #cfcfcf;
+      background: #050505;
+      font-size: 0.92rem;
+    }
+
+    .footer-inner {
+      width: min(1120px, 100%);
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    footer a {
+      color: #f5f5f5;
+      margin-left: 16px;
+      text-decoration-color: var(--red);
+      text-underline-offset: 4px;
+    }
+
+    @keyframes riseIn {
+      from {
+        opacity: 0;
+        transform: translateY(22px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes floatSoft {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-8px);
+      }
+    }
+
+    @keyframes galleryFade {
+      0%, 18% {
+        opacity: 1;
+        transform: scale(1);
+      }
+      25%, 100% {
+        opacity: 0;
+        transform: scale(1.04);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .hero {
+        min-height: 68vh;
+      }
+
+      .about-grid,
+      .contact-panel {
+        grid-template-columns: 1fr;
+      }
+
+      .services {
+        grid-template-columns: 1fr;
+      }
+
+      .gallery-frame {
+        min-height: 360px;
+      }
+
+      .gallery-copy {
+        padding: 24px;
+      }
+
+      .contact-actions {
+        justify-content: flex-start;
+      }
+
+      .btn,
+      .email {
+        width: 100%;
+      }
+
+      footer a {
+        margin-left: 0;
+        margin-right: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-content">
+      <div class="eyebrow">Roadside Refinish</div>
+      <h1>Mobile SMART repairs</h1>
+      <p>Local bodywork repairs for alloy wheels, diamond cut alloys, bumper scuffs, spot repairs and full panels across South Yorkshire and nearby areas.</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="https://wa.me/447914638995">WhatsApp</a>
+        <a class="btn btn-outline" href="https://www.instagram.com/roadsiderefinish/" target="_blank" rel="noopener">Instagram</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="about" id="about">
+      <div class="section-inner about-grid">
+        <div>
+          <span class="section-label">Mobile SMART repair specialists</span>
+          <h2>Small damage repaired cleanly, locally and professionally.</h2>
+          <p class="lead">Roadside Refinish provides fully mobile SMART repairs and local area bodywork repairs throughout Doncaster, Worksop, Rotherham and Sheffield. We specialise in small spot repairs on alloy wheels, diamond cut alloys and vehicle panels, while also carrying out bumper scuff repairs and full panel repairs where needed.</p>
+          <p>Our mobile service is built around convenience: we come to you, assess the repair, and complete high-quality refinishing work without the hassle of a traditional bodyshop visit.</p>
+          <div class="services" aria-label="Services">
+            <div class="service">Alloy wheel repairs</div>
+            <div class="service">Diamond cut alloy repairs</div>
+            <div class="service">Bumper scuff repairs</div>
+            <div class="service">Spot and full panel repairs</div>
+          </div>
+        </div>
+        <aside class="coverage" aria-label="Coverage areas">
+          <h3>Areas covered</h3>
+          <ul>
+            <li>Doncaster</li>
+            <li>Worksop</li>
+            <li>Rotherham</li>
+            <li>Sheffield</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section class="gallery" id="gallery">
+      <div class="section-inner">
+        <span class="section-label">Recent work</span>
+        <h2>Gallery</h2>
+        <div class="gallery-frame" aria-label="Automatically rotating repair gallery">
+          <div class="slide"></div>
+          <div class="slide"></div>
+          <div class="slide"></div>
+          <div class="slide"></div>
+          <div class="gallery-copy">
+            <h2>Upload up to four images</h2>
+            <p>Add your photos as <strong>gallery1.jpg</strong>, <strong>gallery2.jpg</strong>, <strong>gallery3.jpg</strong> and <strong>gallery4.jpg</strong> in the same folder as this page. They will rotate automatically.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="section-inner contact-panel">
+        <div>
+          <span class="section-label">Submit enquiry</span>
+          <h2>Submit enquiry</h2>
+          <p>Send photos of the damage for a quick quote and availability.</p>
+        </div>
+        <div class="contact-actions">
+          <a class="btn btn-primary" href="https://wa.me/447914638995">WhatsApp</a>
+          <a class="btn btn-outline" href="https://www.instagram.com/roadsiderefinish/" target="_blank" rel="noopener">Instagram</a>
+          <a class="email" href="mailto:roadsiderefinish@outlook.com">roadsiderefinish@outlook.com</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <span>&copy; 2026 Roadside Refinish. Mobile SMART repairs.</span>
+      <nav aria-label="Legal links">
+        <a href="TandC.html">Terms and Conditions</a>
+        <a href="Privacy%20Policy.html">Privacy Policy</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>
